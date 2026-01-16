@@ -11,6 +11,7 @@ from nxc.context import Context
 from nxc.helpers.misc import CATEGORY
 from nxc.logger import NXCAdapter
 from nxc.paths import NXC_PATH
+from nxc.helpers.resource_manager import get_resource_manager
 
 
 class ModuleLoader:
@@ -109,8 +110,9 @@ class ModuleLoader:
     def list_modules(self):
         """List modules without initializing them"""
         modules = {}
+        rm = get_resource_manager()
         modules_paths = [
-            path_join(dirname(nxc.__file__), "modules"),
+            rm.get_modules_path(),
             path_join(NXC_PATH, "modules"),
         ]
 

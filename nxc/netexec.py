@@ -1,5 +1,6 @@
 # PYTHON_ARGCOMPLETE_OK
 import sys
+from rich.progress import Progress
 from nxc.helpers.logger import highlight
 from nxc.helpers.misc import identify_target_file, display_modules
 from nxc.parsers.ip import parse_targets
@@ -22,7 +23,6 @@ import os
 from os.path import exists
 from os.path import join as path_join
 from sys import exit
-from rich.progress import Progress
 import platform
 if sys.stdout.encoding == "cp1252":
     sys.stdout.reconfigure(encoding="utf-8")
@@ -68,6 +68,22 @@ async def start_run(protocol_obj, args, db, targets):  # noqa: RUF029
 
 
 def main():
+    # Initialize path independence FIRST
+    from nxc.helpers.resource_manager import get_resource_manager
+    import os
+    
+    rm = get_resource_manager()
+    
+    # Set database path to writable location
+    if 'NXC_DB' not in os.environ:
+        os.environ['NXC_DB'] = str(rm.get_db_path())
+    
+    # Set config path
+    if 'NXC_CONFIG_PATH' not in os.environ:
+        config_path = rm.get_db_path() / 'config'
+        config_path.mkdir(parents=True, exist_ok=True)
+        os.environ['NXC_CONFIG_PATH'] = str(config_path)
+    
     first_run_setup(nxc_logger)
     args, version_info = gen_cli_args()
 

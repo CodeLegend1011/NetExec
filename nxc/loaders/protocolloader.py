@@ -5,6 +5,7 @@ from os.path import join as path_join
 from os.path import dirname, exists
 
 import nxc
+from nxc.helpers.resource_manager import get_resource_manager
 
 
 class ProtocolLoader:
@@ -17,7 +18,8 @@ class ProtocolLoader:
     def get_protocols(self):
         protocols = {}
 
-        proto_path = path_join(dirname(nxc.__file__), "protocols")
+        rm = get_resource_manager()
+        proto_path = rm.get_protocols_path()
         for protocol in listdir(proto_path):
             if protocol[-3:] == ".py" and protocol[:-3] != "__init__":
                 protocol_path = path_join(proto_path, protocol)

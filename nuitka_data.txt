@@ -1,0 +1,21 @@
+# Nuitka data files to bundle with the executable
+# This ensures NetExec works from any directory
+
+# Protocol modules
+nxc/protocols/*.py
+
+# Module files
+nxc/modules/*.py
+
+# Data files and directories
+nxc/data/nxc.conf
+nxc/data/nxc.ico
+nxc/data/default.pem
+nxc/data/impersonate_module/
+nxc/data/keepass_trigger_module/
+nxc/data/msol_dump/
+nxc/data/ntds-dump-raw/
+nxc/data/pi_module/
+nxc/data/procdump/
+nxc/data/veeam_dump_module/
+nxc/data/wmiexec_event_vbscripts/
