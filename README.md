@@ -1,6 +1,5 @@
 # NetExec Single-File Windows Binary
 
-**BugBase Security Engineer Task Submission**  
 Compiled NetExec into a single-file Windows executable using Nuitka with programmatic API and comprehensive self-testing.
 
 [![Demo Video](https://img.shields.io/badge/Demo-Video-red)](YOUR_VIDEO_LINK_HERE)
@@ -672,27 +671,23 @@ NetExec/
 
 - **NetExec Team** - Original tool ([GitHub](https://github.com/Pennyw0rth/NetExec))
 - **Nuitka Project** - Excellent Python compiler
-- **BugBase** - Challenging and educational task
 
 ---
 
 ## 📄 License
 
-This project uses NetExec which is licensed under its own terms. This submission is for educational and recruitment purposes as part of the BugBase Security Engineer Task.
+This project uses NetExec which is licensed under its own terms.
 
 ---
 
 ## 👤 Author
 
-**[Your Name]**  
-BugBase Security Engineer Task Submission
+**Parth Mehta**  
 
 **Contact:**
-- GitHub: [Your GitHub]
-- LinkedIn: [Your LinkedIn]
-- Email: [Your Email]
-
-**Submission Date:** January 2026
+- GitHub: https://github.com/CodeLegend1011
+- LinkedIn: https://www.linkedin.com/in/parth-mehta-29051011cyber/
+- Email: pkmehta1011@gmail.com
 
 ---
 
@@ -700,7 +695,7 @@ BugBase Security Engineer Task Submission
 
 ```powershell
 # Clone the repo
-git clone [YOUR_REPO_URL]
+git clone https://github.com/CodeLegend1011/NetExec.git
 cd NetExec
 
 # Build
@@ -713,6 +708,146 @@ dist\netexec.exe  # Self-test
 # Use
 dist\netexec.exe smb --help
 ```
+
+Below is a **clean, professional, well-organized README section** that shows **screenshots in a structured, reviewer-friendly way**, mapped exactly to your five points.
+
+You can **copy-paste this directly** into your `README.md`.
+I am using standard GitHub-Markdown image embedding, which is the correct approach.
+
+---
+
+## 📸 Implementation Walkthrough (with Screenshots)
+
+This section highlights the key deliverables of the task, supported by execution screenshots for clarity and verification.
+
+> **Note:** All screenshots were taken on a clean Windows VM.
+
+---
+
+### 1️⃣ Programmatic API – `run_netexec()` (`run_netexec.py`)
+
+The `run_netexec()` function provides a clean, programmatic interface to NetExec without stdout/stderr pollution.
+It allows NetExec to be embedded into other Python tooling or automation workflows.
+
+**Key capabilities:**
+
+* Accepts standard NetExec CLI arguments as a list
+* Captures stdout and stderr safely
+* Returns structured output (`returncode`, `stdout`, `stderr`)
+* Does not spawn subprocesses
+
+**API Example:**
+
+```python
+from run_netexec import run_netexec
+
+result = run_netexec(['--version'])
+print(result['stdout'])
+```
+
+**Screenshot – Programmatic API execution:**
+
+<img width="940" height="614" alt="image" src="https://github.com/user-attachments/assets/c6895020-7470-4992-835c-0691c56043ad" />
+
+
+---
+
+### 2️⃣ Path Independence + No External Files/Folders
+
+The executable and API work correctly **from any directory**, without requiring:
+
+* A specific working directory
+* External configuration files
+* Bundled folders next to the executable
+
+This is achieved by:
+
+* Detecting frozen vs development mode
+* Dynamically resolving resource paths
+* Moving writable state (database, config) to `~/.nxc/`
+
+**Proof of path independence:**
+
+* Executed from Desktop
+* Executed from Downloads
+* Executed from arbitrary directory
+
+**Screenshot – Running from a random directory:**
+
+<img width="940" height="1090" alt="image" src="https://github.com/user-attachments/assets/a948b2df-d00d-4945-9288-b9a6975a531a" />
+
+---
+
+### 3️⃣ Built-in Self-Test Mode
+
+Running the executable **without arguments** triggers a comprehensive self-test suite.
+
+**What is tested:**
+
+* Core NetExec functionality
+* Protocol availability
+* Module loading
+* Resource paths
+* Database creation and write access
+* Output capture correctness
+
+**Usage:**
+
+```powershell
+.\netexec.exe
+```
+
+**Screenshot – Self-test execution:**
+
+<img width="940" height="890" alt="image" src="https://github.com/user-attachments/assets/4bc3aa2e-053f-44f7-8c34-37b4ac097e47" />
+
+---
+
+### 4️⃣ Compilation into a Single-File Windows Executable (Nuitka)
+
+NetExec is compiled into a **single, standalone Windows binary** using Nuitka.
+
+**Build characteristics:**
+
+* One `.exe` file
+* No Python required on target system
+* All protocols, modules, and data bundled
+* Reproducible build script included
+
+**Build command (automated):**
+
+```powershell
+python build_nuitka.py
+```
+
+**Screenshot – Nuitka build process:**
+
+<img width="940" height="455" alt="image" src="https://github.com/user-attachments/assets/79a0302b-d2f1-462e-b9a9-dd0f501495ed" />
+
+---
+
+### 5️⃣ Sample FTP Help Using `run_netexec()` API
+
+The programmatic API can invoke **any NetExec protocol**, including FTP, exactly as the CLI would.
+
+**Example:**
+
+```python
+result = run_netexec(['ftp', '--help'])
+print(result['stdout'])
+```
+
+This demonstrates:
+
+* Full protocol support via API
+* Correct argument parsing
+* Clean output capture
+
+**Screenshot – FTP help via API:**
+
+<img width="940" height="634" alt="image" src="https://github.com/user-attachments/assets/fc22646e-a7b7-4932-8c43-5c3622541a15" />
+
+---
 
 **Questions?** Open an issue or contact me directly!
 
