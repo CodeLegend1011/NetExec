@@ -2,7 +2,7 @@
 
 Compiled NetExec into a single-file Windows executable using Nuitka with programmatic API and comprehensive self-testing.
 
-[![Demo Video](https://img.shields.io/badge/Demo-Video-red)](YOUR_VIDEO_LINK_HERE)
+[![Demo Video](https://img.shields.io/badge/Demo-Video-red)](https://drive.google.com/file/d/1Z0Kr15Ha4j0lmGmgqv3C6eyBlm4vFOzs/view?usp=sharing)
 [![Python](https://img.shields.io/badge/Python-3.10-blue)](https://www.python.org/)
 [![Nuitka](https://img.shields.io/badge/Nuitka-1.8%2B-green)](https://nuitka.net/)
 
